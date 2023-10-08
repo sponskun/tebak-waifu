@@ -8,7 +8,7 @@
   <style type="text/tailwindcss">
     @layer components {
       .tittle {
-        @apply text-6xl font-bold text-center my-5 bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent;
+        @apply text-6xl font-bold text-center my-5 bg-gradient-to-r from-red-500 to-red-400 bg-clip-text text-transparent;
       }
 
       .grid-container {
@@ -26,15 +26,17 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
 </head>
-<body style="background-color: rgb(214, 253, 252);">
+<body style="background-image: url(img/wallpaper2.jpg);">
   <div class="container" x-data="game()">
     <!-- <h1 class="tittle" x-data="{ message: 'I ❤️ You'}" x-text="message" x-on:click="message = 'berhasil dibuka'"></h1> -->
-    <h1 class="tittle">Tebak Kartu</h1>
+    <h1 class="tittle">Tebak Waifu</h1>
     
     <div class="grid-container">
       <template x-for="card in cards">
         <div class="aspect-[4/3]">
-          <div class="grid-card" :class="['bg-'+ (card.flipped ? card.color : 'gray') +'-500', card.animate]" @click="flipCard(card)" x-show="!card.cleared"></div>
+          <div class="grid-card" :class="['bg-'+ (card.flipped ? card.color : 'gray') +'-500', card.animate]" @click="flipCard(card)" x-show="!card.cleared">
+            <img :src="card.flipped ? card.image : 'img/paimon.jpg'" class="w-full h-full object-cover rounded-lg">
+          </div>
         </div>
       </template>
     </div>
@@ -45,14 +47,14 @@
     const game = () => {
       return { 
         cards: [ 
-          { color: 'red', flipped: false, cleared: false, animate: '' },
-          { color: 'green', flipped: false, cleared: false, animate: '' },
-          { color: 'blue', flipped: false, cleared: false, animate: '' },
-          { color: 'yellow', flipped: false, cleared: false, animate: '' },
-          { color: 'red', flipped: false, cleared: false, animate: '' },
-          { color: 'green', flipped: false, cleared: false, animate: '' },
-          { color: 'blue', flipped: false, cleared: false, animate: '' },
-          { color: 'yellow', flipped: false, cleared: false, animate: '' },
+          { image: 'img/keqing.jpg', flipped: false, cleared: false, animate: '' },
+          { image: 'img/hutao.jpg', flipped: false, cleared: false, animate: '' },
+          { image: 'img/raiden.jpg', flipped: false, cleared: false, animate: '' },
+          { image: 'img/yelan.jpg', flipped: false, cleared: false, animate: '' },
+          { image: 'img/keqing.jpg', flipped: false, cleared: false, animate: '' },
+          { image: 'img/hutao.jpg', flipped: false, cleared: false, animate: '' },
+          { image: 'img/raiden.jpg', flipped: false, cleared: false, animate: '' },
+          { image: 'img/yelan.jpg', flipped: false, cleared: false, animate: '' },
         ].sort(() => Math.random() - 0.5),
         get flippedCards() {
           return this.cards.filter((card) => card.flipped); 
@@ -70,7 +72,7 @@
 
           // cek ketika sudah ada 2 kartu yang terbuka, lalu cek warnanya sama atau tidak
           if (this.flippedCards.length === 2) {
-            if (this.flippedCards[0].color === this.flippedCards[1].color) {
+            if (this.flippedCards[0].image === this.flippedCards[1].image) {
               // beri animasi sebelum hilang
               this.flippedCards.forEach((card) => card.animate = 'animate__animated animate__rubberBand' )
 
@@ -79,7 +81,7 @@
 
               // cek kartu sudah hilang semua
               if (this.remainingCards.length === 0) {
-                alert('You Won!!!');
+                alert('Gacor Kang!!!');
                 location.reload();
               }
             }
