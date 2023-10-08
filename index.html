@@ -56,6 +56,7 @@
           { image: 'img/raiden.jpg', flipped: false, cleared: false, animate: '' },
           { image: 'img/yelan.jpg', flipped: false, cleared: false, animate: '' },
         ].sort(() => Math.random() - 0.5),
+        
         get flippedCards() {
           return this.cards.filter((card) => card.flipped); 
         },
@@ -74,14 +75,14 @@
           if (this.flippedCards.length === 2) {
             if (this.flippedCards[0].image === this.flippedCards[1].image) {
               // beri animasi sebelum hilang
-              this.flippedCards.forEach((card) => card.animate = 'animate__animated animate__rubberBand' )
+              this.flippedCards.forEach((card) => card.animate = 'animate__animated animate__fadeOut' )
 
               await delay();
               this.flippedCards.forEach((card) => card.cleared = true);
 
               // cek kartu sudah hilang semua
               if (this.remainingCards.length === 0) {
-                alert('Gacor Kang!!!');
+                alert('Awakawokawokowa Gacor Kang!!!');
                 location.reload();
               }
             }
